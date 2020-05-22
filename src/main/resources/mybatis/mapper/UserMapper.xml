@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.blog.spro.mapper.UserMapper">
+
+  <resultMap id="BaseResultMap" type="com.xm.blog.spro.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="trueName" jdbcType="VARCHAR" property="truename" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="personalBrief" jdbcType="VARCHAR" property="personalbrief" />
+    <result column="avatarImgUrl" jdbcType="VARCHAR" property="avatarimgurl" />
+    <result column="recentlyLanded" jdbcType="VARCHAR" property="recentlylanded" />
+  </resultMap>
+    
+    <select id="selectIdByPrimary" resultMap="BaseResultMap" >
+        select * from user where id= #{id}
+    </select>
+
+    <select id="selectPhoneAndPassword" resultMap="BaseResultMap">
+        select * from user where phone= #{phone} and password=#{password}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from user where 1=1
+        <if test="phone != null and phone != ''">
+            and phone = #{phone}
+        </if>
+        <if test="password != null and password != ''">
+            and password = #{password}
+        </if>
+        <if test="phone == '' or password == ''">
+            and 1=2
+        </if>
+    </select>
+
+    <update id="updatePerson" parameterType="com.xm.blog.spro.entity.User">
+        UPDATE user SET
+        <if test="username != null and username != ''">
+            username = #{username},
+        </if>
+        <if test="gender != null and gender != ''">
+            gender= #{gender},
+        </if>
+        <if test="truename != null and truename != ''">
+            trueName = #{truename},
+        </if>
+        <if test="birthday != null and birthday != ''">
+            birthday = #{birthday},
+        </if>
+        <if test="email != null and email != ''">
+            email = #{email},
+        </if>
+        <if test="personalbrief != null and personalbrief != ''">
+            personalBrief = #{personalbrief},
+        </if>
+        id = #{id} WHERE id = #{id}
+    </update>
+
+    <!-- 注册用户 -->
+    <insert id="register" parameterType="com.xm.blog.spro.entity.User">
+        insert into user(phone, username, password, gender) values(#{phone}, #{username}, #{password}, #{gender})
+    </insert>
+
+</mapper>

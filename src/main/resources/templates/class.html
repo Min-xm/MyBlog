@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <title>分类</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 导入jq -->
+    <script type="text/javascript" src="http://localhost:8080/webjars/jquery/3.4.1/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="../static/js/jquery-3.4.1.js"></script>-->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="/css/class.css">
+</head>
+
+<body>
+<!-- 导航栏 -->
+<div id="heads" th:include="index::#heads"></div>
+
+<div id="main">
+    <div class="mains">
+        <!-- 分类目录 -->
+        <div class="catalogue">
+            <h3>Categories</h3>
+            <ul>
+                <li>我的故事</li>
+                <li>其他</li>
+            </ul>
+        </div><!-- 分类目录结尾 -->
+
+        <!-- 目录相应显示的模块 -->
+        <div class="catalogueM">
+
+            <div class="timeline timeline-wrap">
+                <div class="timeline-row">
+                    <span class="node" style="-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;"><i class="glyphicon glyphicon-folder-open"></i></span>
+                    <h1 class="title">#全部分类</h1>
+                </div>
+<!--                &lt;!&ndash; 行模块 &ndash;&gt;-->
+<!--                <div class="timeline-row-major">-->
+<!--                    <span class="node am-animation-slide-top am-animation-delay-1"></span>-->
+<!--                    <div class="content am-comment-main am-animation-slide-top am-animation-delay-1">-->
+<!--                        <header class="am-comment-hd" style="background: #fff">-->
+<!--                            <div class="contentTitle am-comment-meta">-->
+<!--                                <a href="#">愿你编码半生，归来仍是少年</a>-->
+<!--                            </div></header>-->
+<!--                        <div class="am-comment-bd">-->
+<!--                            <i class="glyphicon glyphicon-calendar"> <a href="#">2019-11-05</a></i>-->
+<!--                            <i class="glyphicon glyphicon-folder-close"> <a href="#">我的故事</a></i>-->
+<!--                            <i class="glyphicon glyphicon-tag"><a href="#">生活跪记</a>,<a>原创</a></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>&lt;!&ndash; 行模块结尾 &ndash;&gt;-->
+
+            </div>
+        </div><!-- 目录相应显示的模块结尾 -->
+
+    </div>
+
+    <!-- 评论模块 -->
+    <div id="commentRecord">
+        <!-- 发表评论模块 -->
+        <div class="comment-top-input">
+            <!-- readonly禁止编辑 -->
+            <textarea class="comment-input" th:if="${session.user}" placeholder="写下你的留言..."></textarea>
+        </div><!-- 发表评论模块结尾 -->
+        <!-- 提交评论 -->
+        <div class="commentBtn">
+            <button id="commentBtn" type="button">发表留言</button>
+        </div><!-- 提交评论结尾 -->
+
+        <!-- 用户评论模块 -->
+        <div class="comment-bottom">
+            <div class="article-comment">
+                <div class="article-comment-top">
+                    <span class="article-comment-word">留言</span>
+                    <div class="article-comment-line"></div>
+                </div>
+            </div>
+            <div class="new-comment">
+                <i class="all-comment am-icon-ellipsis-v"></i>全部留言（<span class="commentNum">35</span>）
+            </div>
+
+            <div class="all-comments">
+                <!-- 楼评论 -->
+                <div class="visitorComment" style="width: 600px;">
+                    <div class="am-g">
+                        <!-- 头像 -->
+                        <div class="visitorCommentImg am-u-sm-2 am-u-lg-1" style="float:left;">
+                            <img src="https://zhy-myblog.oss-cn-shenzhen.aliyuncs.com/public/user/avatar/noLogin_male.jpg">
+                        </div><!-- 头像结尾 -->
+                        <div class="am-u-sm-10 am-u-lg-11">
+                            <!-- 一级评论 -->
+                            <div>
+                                <div class="visitorInfo">
+                                    <span class="visitorFloor">#9楼</span>
+                                    <span class="visitorName">ykb</span>
+                                    <span class="visitorPublishDate">2020-04-18 13:07</span>
+                                </div>
+                                <div class="visitorSay">hhh</div>
+                                <div class="tool-group">
+                                    <a><i class="like glyphicon glyphicon-thumbs-up">&nbsp;&nbsp;<span>0</span>人赞</i></a>
+                                    <a><i class="replyReply glyphicon glyphicon-comment">&nbsp;&nbsp;回复</i></a>
+                                </div>
+                            </div><!-- 一级评论结尾 -->
+
+                            <!-- 二、三级评论 -->
+                            <div class="sub-comment-list">
+                                <div class="visitorReplies">
+                                    <div class="visitorReply">
+                                        <div class="visitorReplyWords"><a class="answerer">ykb</a>：<a class="respondent">@ykb</a>&nbsp;&nbsp; dsfdsf</div>
+                                        <div class="visitorReplyTime">
+                                            <span class="visitorReplyTimeTime">2020-04-18 13:13</span>
+                                            <a><i class="replyReply am-icon-comment-o glyphicon glyphicon-comment">&nbsp;&nbsp;回复</i></a>
+                                        </div>
+                                        <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed">
+                                    </div>
+                                </div>
+                                <div class="more-comment"><a><i class="moreComment am-icon-edit glyphicon glyphicon-edit"> 添加新评论</i></a></div>
+                            </div><!-- 二、三级评论结尾 -->
+
+                            <!-- 写二、三级评论 -->
+                            <div class="reply-sub-comment-list am-animation-slide-bottom" style="display: none;" >
+                                <div class="replyWord">
+                                    <div class="replyWordBtn">
+                                        <textarea class="replyWordTextarea" placeholder="写下你的评论..."></textarea>
+                                        <button type="button" class="sendReplyWordBtn am-btn am-btn-success">发送</button>
+                                        <button type="button" class="quitReplyWordBtn am-btn">取消</button>
+                                    </div>
+                                </div>
+                            </div><!-- 写二、三级评论结尾 -->
+
+                        </div>
+                    </div>
+                </div><!-- 楼评论结尾 -->
+                <hr>
+            </div>
+
+        </div>
+    </div><!-- 用户评论模块结尾 -->
+</div><!-- 评论模块结尾 -->
+
+
+</div>
+
+<!-- 保存楼层数（pid） -->
+<input id="pid" type="text" hidden="hidden" value="1">
+<!-- 保存文章id -->
+<input id="articleId" type="text" hidden="hidden" th:value="${session.articleID}">
+<!-- 保存用户名 -->
+<input id="originalauthor" type="text" hidden="hidden" th:value="${session.user.getUsername()}">
+<!-- 保存用户id -->
+<input id="userID" type="text" hidden="hidden" th:value="${session.user.getId()}">
+
+
+<script>
+
+
+    $(document).ready(function () {
+        var token = $("meta[name='_csrf']").attr("content")
+        var header = $("meta[name='_csrf_header']").attr("content")
+        $(document).ajaxSend(function (e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        })
+
+        $("#commentBtn").click(function () {
+            //先判断发表内容是否为空
+            if($(".comment-input").val() != ""){
+                //发表一级评论
+                $.ajax({
+                    type: "post",
+                    url: "/insertOneComment",
+                    data: {pid:$("#pid").val(), commentcontent:$(".comment-input").val(), originalauthor:$("#originalauthor").val(),articleid:$("#articleId").val() },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log("成功")
+                        //先清空块内容,不然楼层会重复
+                        $(".all-comments").html("");
+                        start();
+                    },
+                    error: function (data) {
+                        console.log("失败")
+                    }
+                });
+            }else{
+                alert("评论为空")
+            }
+        })
+
+
+        //全部分类初始化
+        function startC(){
+            $.ajax({
+                type: "post",
+                url: "/startClass",
+                data: {currentPage:$(this).text()},
+                dataType: "json",
+                success: function (data) {
+                    var s = "";
+                    $.each(data, function (i, val) {
+                        s += "<div class=\"timeline-row-major\">\n" +
+                            "                    <span class=\"node am-animation-slide-top am-animation-delay-1\"></span>\n" +
+                            "                    <div class=\"content am-comment-main am-animation-slide-top am-animation-delay-1\">\n" +
+                            "                        <header class=\"am-comment-hd\" style=\"background: #fff\">\n" +
+                            "                            <div class=\"contentTitle am-comment-meta\">\n" +
+                            "                                <a href=\""+"/article/"+val.articleid+"\">"+val.articletitle+"</a>\n" +
+                            "                            </div></header>\n" +
+                            "                        <div class=\"am-comment-bd\">\n" +
+                            "                            <i class=\"glyphicon glyphicon-calendar\"> <a href=\"#\">"+val.updatedate+"</a></i>\n" +
+                            "                            <i class=\"glyphicon glyphicon-folder-close\"> <a href=\"#\">"+val.articletype+"</a></i>\n" +
+                            "                            <i class=\"glyphicon glyphicon-tag\"><a href=\"#\">"+val.articletags+"</a>,<a>原创</a></i>\n" +
+                            "                        </div>\n" +
+                            "                    </div>\n" +
+                            "                </div>";
+                    })
+                    $(".timeline").append(s)
+                    console.log("成功")
+                },
+                error: function (data) {
+                    console.log("失败")
+                }
+            });
+        }
+        startC();
+
+
+
+        //初始化
+        function start(){
+
+            $.ajax({
+                type: "get",
+                url: "/getComment",
+                data: {},
+                dataType: "json",
+                success: function (data) {
+                    //用于保存楼层数，发表一级评论的时候就可以 楼层数+1形成pid传入
+                    var pid;
+                    //先循环一级评论形成楼层
+                    $.each(data["oneComment"], function (i,val) {
+
+                        var id = val.pid;
+                        //头
+                        var head = "<div class=\"visitorComment\" style=\"width: 600px;\"><div class=\"am-g\">";
+                        //头像
+                        var headImg = "<div class=\"visitorCommentImg am-u-sm-2 am-u-lg-1\" style=\"float:left;\">\n" +
+                            "            <img src=\"https://zhy-myblog.oss-cn-shenzhen.aliyuncs.com/public/user/avatar/noLogin_male.jpg\">\n" +
+                            "        </div>";
+                        //评论模块开头
+                        var headComment = "<div class=\"am-u-sm-10 am-u-lg-11\">";
+                        //一级评论
+                        var oneComment = "<div>\n" +
+                            "                <div class=\"visitorInfo\">\n" +
+                            "                    <span class=\"visitorFloor\">#"+(i+1)+"楼</span>\n" +
+                            "                    <input class=\"visitorFloorID\" type='text' hidden='hidden' value='"+(i+1)+"' />\n" +
+                            "                    <span class=\"visitorName\">"+val.originalauthor+"</span>\n" +
+                            "                    <span class=\"visitorPublishDate\">"+val.commentdate+"</span>\n" +
+                            "                </div>\n" +
+                            "                <div class=\"visitorSay\">"+val.commentcontent+"</div>\n" +
+                            "                <div class=\"tool-group\">\n" +
+                            "                    <a><i class=\"like glyphicon glyphicon-thumbs-up\">&nbsp;&nbsp;<span>"+val.likes+"</span>人赞</i></a>\n" +
+                            "                </div>\n" +
+                            "            </div>";
+
+
+                        //用户评论模块开头
+                        var userHeadComment = "<div class=\"sub-comment\">"+ "<div class=\"sub-comment\">\n" +
+                            "                <div class=\"sub-comment-list\">\n" ;
+                        var TwoComment = "";
+                        //二级评论模块
+                        $.each(data["twoComment"], function (j, val) {
+                            if (val.pid == id) {
+                                TwoComment +=
+                                    "                    <div class=\"visitorReplies\">\n" +
+                                    "                        <div class=\"visitorReply\">\n" +
+                                    "                            <div class=\"visitorReplyWords\"><a class=\"answerer\">"+val.originalauthor+"</a>：<a class=\"respondent\">@"+(i+1)+"楼主</a>&nbsp;&nbsp; "+val.commentcontent+"</div>\n" +
+                                    "                    <input class=\"answereID\" type='text' hidden='hidden' value='"+val.answereid+"' />\n" +
+                                    "                            <div class=\"visitorReplyTime\">\n" +
+                                    "                                <span class=\"visitorReplyTimeTime\">"+val.commentdate+"</span>\n" +
+                                    "                                <a><i class=\"replyReply am-icon-comment-o glyphicon glyphicon-comment  two-reply\">&nbsp;&nbsp;回复</i></a>\n" +
+                                    "                            </div>\n" +
+                                    "                            <hr data-am-widget=\"divider\" style=\"\" class=\"am-divider am-divider-dashed\">\n" +
+                                    "                        </div>\n" +
+                                    "                    </div>\n" ;
+                            }
+                        });
+                        var ThreeComment = "";
+
+                        //被评论用户
+                        var byUser = "";
+                        //三级评论
+                        $.each(data["threeComment"], function (i,val) {
+                            if((i+1)%2 ==0){
+                                byUser = val.originalauthor;
+                            }
+                            if (val.pid == id) {
+                                ThreeComment +=
+                                    "                    <div class=\"visitorReplies\">\n" +
+                                    "                        <div class=\"visitorReply\">\n" +
+                                    "                            <div class=\"visitorReplyWords\"><a class=\"answerer\">"+val.originalauthor+"</a>：<a class=\"respondent\">@"+byUser+"</a>&nbsp;&nbsp; "+val.commentcontent+"</div>\n" +
+                                    "                    <input class=\"respondentID\" type='text' hidden='hidden' value='"+val.respondentid+"' />\n" +
+                                    "                            <div class=\"visitorReplyTime\">\n" +
+                                    "                                <span class=\"visitorReplyTimeTime\">"+val.commentdate+"</span>\n" +
+                                    "                                <a><i class=\"replyReply am-icon-comment-o glyphicon glyphicon-comment three-reply \">&nbsp;&nbsp;回复</i></a>\n" +
+                                    "                            </div>\n" +
+                                    "                            <hr data-am-widget=\"divider\" style=\"\" class=\"am-divider am-divider-dashed\">\n" +
+                                    "                        </div>\n" +
+                                    "                    </div>\n" ;
+                            }
+                        });
+
+                        //写二、三级评论模块
+                        var writeTwoThree =
+                            "                    <div class=\"more-comment\"><a><i class=\"moreComment am-icon-edit glyphicon glyphicon-edit\"> 添加新评论</i></a></div>\n" +
+                            "                </div>"+
+                            "<div class=\"reply-sub-comment-list am-animation-slide-bottom\" style=\"display: none;\">\n" +
+                            "                    <div class=\"replyWord\" ><div class=\"replyWordBtn\">\n" +
+                            "                        <textarea class=\"replyWordTextarea\" placeholder=\"写下你的评论...\"></textarea>\n" +
+                            "                        <button type=\"button\" class=\"sendReplyWordBtn am-btn am-btn-success\">发送</button>\n" +
+                            "                        <button type=\"button\" class=\"quitReplyWordBtn am-btn\">取消</button>\n" +
+                            "                    </div>\n" +
+                            "                    </div>\n" +
+                            "                </div>";
+
+                        //用户评论模块结尾
+                        var lastHeadComment = "</div>";
+                        //评论模块结尾
+                        var lastComment = "</div>";
+                        //尾
+                        var last = "</div></div><!-- 楼评论结尾 --><hr>\n" +
+                            "<hr>\n";
+                        $(".all-comments").prepend(head+headImg+headComment+oneComment+userHeadComment+TwoComment+ThreeComment+writeTwoThree+lastHeadComment+lastComment+last);
+
+                        $("#pid").attr("value",i+2);
+                    })
+
+                    //因为ajax是最后执行的所以应该在ajax完结的最后添加点击事件
+                    //添加新评论事件(相当于二级评论)
+                    $(".more-comment").click(function () {
+                        $(this).closest(".am-g").find(".am-animation-slide-bottom").show();
+                        var pid = $(this).closest(".am-g").find(".visitorFloorID").val();
+
+                        $(this).closest(".am-g").find(".sendReplyWordBtn").click(function () {
+                            //先判断发表内容是否为空
+                            if($(this).closest(".am-g").find(".replyWordTextarea").val() != ""){
+                                //发表二级评论
+                                $.ajax({
+                                    type: "post",
+                                    url: "/insertTwoComment",
+                                    data: {pid: pid,
+                                        commentcontent:$(this).closest(".am-g").find(".replyWordTextarea").val(),
+                                        originalauthor:$("#originalauthor").val(),
+                                        articleid:$("#articleId").val(),
+                                        answereid:$("#userID").val()},
+                                    dataType: "json",
+                                    success: function (data) {
+                                        console.log("成功")
+                                        //先清空块内容,不然楼层会重复
+                                        $(".all-comments").html("");
+                                        start();
+                                    },
+                                    error: function (data) {
+                                        console.log("失败")
+                                    }
+                                });
+                            }else{
+                                alert("评论为空")
+                            }
+                        })
+                    })
+
+
+                    //回复事件（二级评论转三级评论）
+                    $(".two-reply").click(function () {
+                        $(this).closest(".am-g").find(".am-animation-slide-bottom").show();
+                        var pid = $(this).closest(".am-g").find(".visitorFloorID").val();
+                        $(this).closest(".am-g").find(".sendReplyWordBtn").click(function () {
+                            // console.log($(this).closest(".am-g").find(".respondentID").val());
+                            console.log($(this).closest(".am-g").find(".answereID").val());
+                            //先判断发表内容是否为空
+                            if($(this).closest(".am-g").find(".replyWordTextarea").val() != ""){
+                                //发表三级评论
+                                $.ajax({
+                                    type: "post",
+                                    url: "/insertThreeComment",
+                                    data: {pid: pid,
+                                        commentcontent:$(this).closest(".am-g").find(".replyWordTextarea").val(),
+                                        originalauthor:$("#originalauthor").val(),
+                                        articleid:$("#articleId").val(),
+                                        answereid:$("#userID").val(),
+                                        respondentid:$(this).closest(".am-g").find(".answereID").val()},
+                                    dataType: "json",
+                                    success: function (data) {
+                                        console.log("成功")
+                                        //先清空块内容,不然楼层会重复
+                                        $(".all-comments").html("");
+                                        start();
+                                    },
+                                    error: function (data) {
+                                        console.log("失败")
+                                    }
+                                });
+                            }else{
+                                alert("评论为空")
+                            }
+                        })
+                    })
+
+
+                    //回复事件（三级评论）
+                    $(".three-reply").click(function () {
+                        $(this).closest(".am-g").find(".am-animation-slide-bottom").show();
+                        var pid = $(this).closest(".am-g").find(".visitorFloorID").val();
+                        $(this).closest(".am-g").find(".sendReplyWordBtn").click(function () {
+                            console.log($(this).closest(".am-g").find(".respondentID").val());
+                            // console.log($(this).closest(".am-g").find(".answereID").val());
+                            //先判断发表内容是否为空
+                            if($(this).closest(".am-g").find(".replyWordTextarea").val() != ""){
+                                //发表三级评论
+                                $.ajax({
+                                    type: "post",
+                                    url: "/insertThreeComment",
+                                    data: {pid: pid,
+                                        commentcontent:$(this).closest(".am-g").find(".replyWordTextarea").val(),
+                                        originalauthor:$("#originalauthor").val(),
+                                        articleid:$("#articleId").val(),
+                                        answereid:$("#userID").val(),
+                                        respondentid:$(this).closest(".am-g").find(".respondentID").val()},
+                                    dataType: "json",
+                                    success: function (data) {
+                                        console.log("成功")
+                                        //先清空块内容,不然楼层会重复
+                                        $(".all-comments").html("");
+                                        start();
+                                    },
+                                    error: function (data) {
+                                        console.log("失败")
+                                    }
+                                });
+                            }else{
+                                alert("评论为空")
+                            }
+                        })
+                    })
+
+                    //取消
+                    $(".quitReplyWordBtn").click(function () {
+                        $(".am-animation-slide-bottom").hide();
+                    })
+
+                },
+                error: function (data) {
+                    console.log("错误")
+                }
+            });
+
+        }
+
+        //先让评论初始化
+        start();
+
+    })
+
+
+
+</script>
+
+
+
+</body>
+</html>

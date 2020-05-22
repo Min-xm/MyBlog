@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+
+
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- 导入jq -->
+<script type="text/javascript" src="http://localhost:8080/webjars/jquery/3.4.1/jquery.min.js"></script>
+<!--<script type="text/javascript" src="../static/js/jquery-3.4.1.js"></script>-->
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+</script>
+
+<link rel="stylesheet" type="text/css" href="/css/index.css">
+<body>
+<!-- 导航栏 -->
+<div id="heads" th:fragment="heads">
+    <!-- 网站logo图+网站名 -->
+    <div class="LogoAndName">
+        <img class="logoLeft" src="http://localhost:8080/images/logoLeft.png">
+        <span class="blogName">天边一朵云</span>
+    </div><!-- 网站logo图+网站名结尾 -->
+
+    <!-- 多标签栏：首页、分类、归档、标签、关于我 -->
+    <div class="search">
+        <!-- label1设置浮动 -->
+        <div class="label1">
+            <!-- spanFont1用于设置字体 -->
+            <a href="/index"><span class="glyphicon glyphicon-home spanFont1 changeColor" aria-hidden="true">首页</span></a>
+        </div>
+        <div class="label1">
+            <a href="/class"><span class="glyphicon glyphicon-align-justify spanFont1 changeColor" aria-hidden="true">分类</span></a>
+        </div>
+        <div class="label1">
+            <a href="/file"><span class="glyphicon glyphicon-book spanFont1 changeColor" aria-hidden="true">归档</span></a>
+        </div>
+        <div class="label1">
+            <span class="glyphicon glyphicon-tags spanFont1 changeColor" aria-hidden="true">标签</span>
+        </div>
+        <div class="label1">
+            <span class="glyphicon glyphicon-user spanFont1 changeColor" aria-hidden="true">关于我</span>
+        </div>
+    </div><!-- 多标签栏：首页、分类、归档、标签、关于我结尾 -->
+
+    <!-- 登录、注册按钮 -->
+    <div class="LoginAndRegister">
+        <div class="btn-group" role="group" th:if="${session.user==null}">
+            <a href="http://localhost:8080/loginb"><button type="button" class="btn btn-default">登录</button></a>
+            <a href="/Register"><button type="button" class="btn btn-default">注册</button></a>
+        </div>
+        <!-- Single button -->
+        <div class="btn-group" th:if="${session.user!=null}">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getUsername()}">
+                用户名 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="/admin.html" th:if="${session.user.getId()==1}">个人主页</a></li>
+                <li><a href="/guest.html" th:if="${session.user.getId()!=1}">个人主页</a></li>
+                <li><a href="#">消息</a></li>
+                <li><a href="#">反馈</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/cancel">退出登录</a></li>
+            </ul>
+        </div>
+
+
+    </div><!-- 登录、注册按钮结尾 -->
+</div><!-- 导航拦结尾 -->
+
+<!-- 主体 -->
+<div id="main">
+    <!-- mainS是主体左、中、右的通用样式 -->
+    <!-- 主体左边 -->
+    <div class="mainLeft mainS">
+        <!-- 主体左边个人信息模块 -->
+        <div class="userInfo">
+            <!-- 头像姓名、座右铭 -->
+            <div class="nameAndMotto">
+                <div class="headSculpture"><img src="http://localhost:8080/images/39.png"></div>
+                <div class="headName">
+                    <p style="font-size: 20px;font-weight: bolder;">叶小明</p>
+                    <span style="font-size: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;小明哥哥世界第一帅，不管你相信或者不相信，反正我信了。</span>
+                </div>
+            </div><!-- 头像姓名、座右铭结尾 -->
+
+            <!-- logo列表 -->
+            <div class="logoList">
+                <span class="">这个部分暂无内容</span>
+            </div><!-- logo列表结尾 -->
+
+        </div><!-- 主体左边个人信息模块结尾 -->
+
+        <!-- 主体左边最新评论模块模块 -->
+        <div class="newComment">
+            <div style="border-bottom: solid 1px;border-bottom-color: #CCCCCC;font-weight: bolder">
+                <span>最新评论</span>
+            </div>
+            <div class="newCommentB">
+                <!-- 游客评论 -->
+                <div class="guestComment">
+                    <p>博客内容.....</p>
+                    <p class="time">日期</p>
+                    <p>用户名：内容</p>
+                </div><!-- 游客评论结尾 -->
+                <div class="guestComment">
+                    <p>博客内容.....</p>
+                    <p class="time">日期</p>
+                    <p>用户名：内容</p>
+                </div><!-- 游客评论结尾 -->
+                <div class="guestComment">
+                    <p>博客内容.....</p>
+                    <p class="time">日期</p>
+                    <p>用户名：内容</p>
+                </div><!-- 游客评论结尾 -->
+                <div class="guestComment">
+                    <p>博客内容.....</p>
+                    <p class="time">日期</p>
+                    <p>用户名：内容</p>
+                </div><!-- 游客评论结尾 -->
+            </div>
+            <!--  -->
+            <div style="width:200px;">
+                <div class="lastPage lastPageB" hidden="hidden">
+                    <span class="glyphicon glyphicon-menu-left" style="font-size: 10px"></span>
+                    <span>上一页</span>
+                </div>
+                <div class="nextPage nextPageB">
+                    <span>下一页</span>
+                    <span class="glyphicon glyphicon-menu-right" style="font-size: 10px"></span>
+                </div>
+            </div><!--  -->
+        </div><!-- 主体左边最新评论模块模块结尾 -->
+
+        <!-- 主体左边最新留言模块模块 -->
+        <div class="newComment">
+            <div style="border-bottom: solid 1px;border-bottom-color: #CCCCCC;font-weight: bolder">
+                <span>最新留言</span>
+            </div>
+            <div class=" newCommentC">
+                <!-- 游客留言 -->
+                <div class="guestComment">
+                    <p>留言内容.....</p>
+                    <p class="time">日期</p>
+                </div><!-- 游客留言结尾 -->
+                <div class="guestComment">
+                    <p>留言内容.....</p>
+                    <p class="time">日期</p>
+                </div><!-- 游客留言结尾 -->
+                <div class="guestComment">
+                    <p>留言内容.....</p>
+                    <p class="time">日期</p>
+                </div><!-- 游客留言结尾 -->
+                <div class="guestComment">
+                    <p>留言内容.....</p>
+                    <p class="time">日期</p>
+                </div><!-- 游客留言结尾 -->
+            </div>
+            <!--  -->
+            <div style="width:200px;">
+                <div class="lastPage lastPageC" style="display: none;">
+                    <span class="glyphicon glyphicon-menu-left" style="font-size: 10px"></span>
+                    <span>上一页</span>
+                </div>
+                <div class="nextPage nextPageC">
+                    <span>下一页</span>
+                    <span class="glyphicon glyphicon-menu-right" style="font-size: 10px"></span>
+                </div>
+            </div><!--  -->
+
+        </div><!-- 主体左边最新留言模块模块结尾 -->
+    </div><!-- 主体左边结尾 -->
+
+    <!-- 主体的中间 -->
+    <div class="mainCenter mainS">
+        <!-- 博文模块 -->
+        <div class="blogContent" th:each="article:${articleList}">
+            <!-- 博文头（包括标题、原创还是转载、日期、作者...） -->
+            <div class="blogHead">
+                <a th:href="@{'/article/'+${article.getArticleid()}}"><p style="font-size: 20px;font-weight: bolder;text-align: center" th:text="${article.getArticletitle()}">博文标题</p></a>
+                <div class="blogContentInfo">
+                    <span class="label label-info">原创</span>
+                    <span class="glyphicon glyphicon-calendar" th:text="${article.getPublishdate()}">日期</span>
+                    <span class="glyphicon glyphicon-user" th:text="${article.getAuthor()}">作者</span>
+                    <span class="glyphicon glyphicon-folder-close" th:text="${article.getArticletype()}">类别</span>
+                </div>
+            </div><!-- 博文头结尾 -->
+            <!-- 博文 -->
+            <div class="setFont1" th:text="${article.getArticletabloid()}">
+                博文内容本节将网页设计中常见的色彩搭配按照色相的顺序归类。每类都以该色相为主，配以其他色相或者同色相的，应用对比和调和的方法，并按照从轻快到浓烈的顺序排序。
+                包括250多个来自 Glyphicon Halflings 的字体图标。Glyphicons Halflings 一般是收费的，但是他们的作者允许 Bootstrap 免费使用。
+                为了表示感谢，希望你在使用时尽量为 Glyphicons 添加一个友情链接。无数可复用的组件，包括字体图标、下拉菜单、导航、警告框、弹出框等更
+            </div><!-- 博文结尾 -->
+            <div style="margin-left: 15px">阅读全文<span class="glyphicon glyphicon-menu-right" style="font-size: 10px;"></span></div>
+            <!-- 博文标签 -->
+            <hr>
+            <div style="margin-left: 10px;">
+                <div style="float: left" th:each="tag:${article.getArticletags().split('、')}">
+                    <span class="glyphicon glyphicon-tags" th:text="${tag.toString()}">标签1</span>
+                </div>
+            </div><!-- 博文标签结尾 -->
+        </div><!-- 博文模块结尾 -->
+
+        <div class="page">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li th:each="page:${pages}"><a th:href="@{'/index/'+${page.toString()}}" th:text="${page.toString()}">1 </a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </div><!-- 主体中间结尾 -->
+
+    <!-- 最新评论当前页数 -->
+    <input type="text" value="1" hidden="hidden" id="currentPageB">
+    <!-- 最新留言当前页数 -->
+    <input type="text" value="1" hidden="hidden" id="currentPageC">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // $(".pagination li").each(function () {
+            //     $(this).click(function () {
+            //         $(".pagination li").each(function () {
+            //             $(this).removeClass("active")
+            //         })
+            //         $(this).addClass("active")
+                    // $.ajax({
+                    //     type: "get",
+                    //     url: "/testAjax",
+                    //     data: {currentPage:$(this).text()},
+                    //     dataType: "json",
+                    //     success: function (data) {
+                    //         console.log($(".blogContent"))
+                    //         console.log(data)
+                    //     },
+                    //     error: function (data) {
+                    //         console.log(data)
+                    //     }
+                    // });
+            //     })
+            // })
+
+            var currentPageB = 1;
+            var currentPageC = 1;
+
+            //初始化评论
+            function start(){
+                $.ajax({
+                    type: "get",
+                    url: "/startCommentB",
+                    data: {currentPage:currentPageB},
+                    dataType: "json",
+                    success: function (data) {
+                        $(".newCommentB").html("");
+                        var s = "";
+                        $.each(data, function (i, val) {
+                            s = "<div class=\"guestComment\">\n" +
+                                "                    <p class=\"time\">"+val.commentdate+"</p>\n" +
+                                "                    <p>"+val.originalauthor+"："+val.commentcontent+"</p>\n" +
+                                "                </div>";
+                            $(".newCommentB").prepend(s);
+                        })
+                        console.log("成功")
+                    },
+                    error: function (data) {
+                        console.log("失败")
+                    }
+                });
+            }
+            start();
+
+            $(".nextPageB").click(function () {
+                currentPageB += 1;
+                $("#currentPageB").attr("value",currentPageB);
+                if ($("#currentPageB").val() == 1){
+                    $(".lastPageB").hide();
+                }else{
+                    $(".lastPageB").show();
+                }
+                start();
+            })
+
+            $(".lastPageB").click(function () {
+                currentPageB -= 1;
+                $("#currentPageB").attr("value",currentPageB)
+                if ($("#currentPageB").val() == 1){
+                    $(".lastPageB").hide();
+                }else{
+                    $(".lastPageB").show();
+                }
+                start();
+            })
+
+            //初始化留言
+            function start2(){
+                $.ajax({
+                    type: "get",
+                    url: "/startCommentC",
+                    data: {currentPage:currentPageC},
+                    dataType: "json",
+                    success: function (data) {
+                        //先清空内容
+                        $(".newCommentC").html("");
+                        var s = "";
+                        $.each(data, function (i, val) {
+                            s = "<div class=\"guestComment\">\n" +
+                                "                    <p class=\"time\">"+val.commentdate+"</p>\n" +
+                                "                    <p>"+val.originalauthor+"："+val.commentcontent+"</p>\n" +
+                                "                </div>";
+                            // 按照从新到旧的排序
+                            $(".newCommentC").prepend(s);
+                        })
+                        console.log("成功")
+                    },
+                    error: function (data) {
+                        console.log("失败")
+                    }
+                });
+            }
+            start2();
+
+            $(".nextPageC").click(function () {
+                currentPageC += 1;
+                $("#currentPageC").attr("value",currentPageC);
+                if ($("#currentPageC").val() == 1){
+                    $(".lastPageC").hide();
+                }else{
+                    $(".lastPageC").show();
+                }
+                start2();
+            })
+
+            $(".lastPageC").click(function () {
+                currentPageC -= 1;
+                $("#currentPageC").attr("value",currentPageC)
+                if ($("#currentPageC").val() == 1){
+                    $(".lastPageC").hide();
+                }else{
+                    $(".lastPageC").show();
+                }
+                start2();
+            })
+
+
+
+        })
+    </script>
+
+    <!-- 主体的右边 -->
+    <div class="mainRight mainS">
+        <!-- 公告 -->
+        <div class="notice">
+            <p style="font-size: 20px;font-weight: bolder;text-align: center">公告</p>
+            <div>
+                <span style="font-size: 25px;margin-left: 10px;font-weight: bolder">“</span>
+                <p>静夜思</p>
+                <p>床前明月光</p>
+                <p>疑是地上霜</p>
+                <p>举头望明月</p>
+                <p>低头思故乡</p>
+                <span style="font-size: 25px;margin-left: 10px;font-weight: bolder;position: absolute;right: 10px;">”</span>
+            </div>
+        </div><!-- 公告结尾 -->
+
+
+    </div><!-- 主体右边结尾 -->
+
+</div>
+
+</body>
+
+</html>

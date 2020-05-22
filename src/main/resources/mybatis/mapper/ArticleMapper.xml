@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.blog.spro.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.xm.blog.spro.entity.Article">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="articleId" jdbcType="BIGINT" property="articleid" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="originalAuthor" jdbcType="VARCHAR" property="originalauthor" />
+    <result column="articleTitle" jdbcType="VARCHAR" property="articletitle" />
+    <result column="articleTags" jdbcType="VARCHAR" property="articletags" />
+    <result column="articleType" jdbcType="VARCHAR" property="articletype" />
+    <result column="articleCategories" jdbcType="VARCHAR" property="articlecategories" />
+    <result column="publishDate" jdbcType="VARCHAR" property="publishdate" />
+    <result column="updateDate" jdbcType="VARCHAR" property="updatedate" />
+    <result column="articleUrl" jdbcType="VARCHAR" property="articleurl" />
+    <result column="articleTabloid" jdbcType="VARCHAR" property="articletabloid" />
+    <result column="likes" jdbcType="INTEGER" property="likes" />
+    <result column="lastArticleId" jdbcType="BIGINT" property="lastarticleid" />
+    <result column="nextArticleId" jdbcType="BIGINT" property="nextarticleid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xm.blog.spro.entity.Article">
+    <result column="articleContent" jdbcType="LONGVARCHAR" property="articlecontent" />
+  </resultMap>
+
+  <select id="getAll" resultMap="ResultMapWithBLOBs">
+      select * from article
+  </select>
+
+  <insert id="insertBlog" parameterType="com.xm.blog.spro.entity.Article">
+      insert into article(articleId,author,originalAuthor,articleTitle,articleContent,articleTags,articleType,articleCategories,publishDate,updateDate,articleUrl,articleTabloid)
+      values(#{articleid}
+      ,#{author}
+      ,#{originalauthor}
+      ,#{articletitle}
+      ,#{articlecontent}
+      ,#{articletags}
+      ,#{articletype}
+      ,#{articlecategories}
+      ,#{publishdate}
+      ,#{updatedate}
+      ,#{articleurl}
+      ,#{articletabloid})
+  </insert>
+
+    <update id="updateArticle" parameterType="com.xm.blog.spro.entity.Article">
+        UPDATE article SET
+        <if test="author != null and author != ''">
+            author= #{author},
+        </if>
+        <if test="originalauthor != null and originalauthor != ''">
+            originalAuthor = #{originalauthor},
+        </if>
+        <if test="articletitle != null and articletitle != ''">
+            articleTitle = #{articletitle},
+        </if>
+        <if test="articlecontent != null and articlecontent != ''">
+            articleContent = #{articlecontent},
+        </if>
+        <if test="articletags != null and articletags != ''">
+            articleTags = #{articletags},
+        </if>
+        <if test="articletype != null and articletype != ''">
+            articleType = #{articletype},
+        </if>
+        <if test="articlecategories != null and articlecategories != ''">
+            articleCategories = #{articlecategories},
+        </if>
+        <if test="publishdate != null and publishdate != ''">
+            publishDate = #{publishdate},
+        </if>
+        <if test="updatedate != null and updatedate != ''">
+            updateDate = #{updatedate},
+        </if>
+        <if test="articleurl != null and articleurl != ''">
+            articleUrl = #{articleurl},
+        </if>
+        <if test="articletabloid != null and articletabloid != ''">
+            articleTabloid = #{articletabloid},
+        </if>
+        articleId = #{articleid} WHERE articleId = #{articleid}
+    </update>
+
+    <delete id="deleteArticle" parameterType="long">
+        DELETE FROM article WHERE articleId = #{articleid}
+    </delete>
+
+  <select id="selectArticleId" resultMap="ResultMapWithBLOBs" parameterType="long">
+      select * from article where articleId = #{articleid}
+  </select>
+</mapper>
